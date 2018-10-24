@@ -1,4 +1,4 @@
-# License Plate Recognition Using Deep-Learning
+﻿# License Plate Recognition Using Deep-Learning
 ### Group Members:
 * Mert Sert
 * Bengisu Şeyma Aydoğdu
@@ -16,6 +16,7 @@ Comparison of plate recognition systems using image processing algorithms and us
 * [Project Work Plan](https://docs.google.com/spreadsheets/d/1Ffa1HwMdCqMHdenra2ThH0o4HozWeRREr93mRPA_vV0/edit#gid=0)
 * [Literature Review](https://github.com/CankayaUniversity/ceng-407-408-License-Plate-Recognition-Using-Deep-Learning/blob/master/README.md)
 ### Projects and Software
+
 
 ### Datasets
 
