@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="meanStackTemplate">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/upload.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/static/js/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/static/js/materialize/materialize.min.js"></script>
+
+  <script type="text/javascript" src="/static/js/angular/angular.min.js"></script>
+
+</head>
+
+<body ng-controller="mainController">
+  <div class="container">
+    <form action="/upload" method="POST">
+      <input type="file" onchange="angular.element(this).scope().SelectFile(event)">
+      <p>Drag plate image to here or click in this area.</p>
+      <button type="button" ng-click="submitFile()" ng-disabled="PreviewImage == null" data-toggle="modal" data-target="#myModal">Upload
+        and Find Plate</button>
+    </form>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Result</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <h5 class="center">Orginal Image:</h5>
+            <img ng-src="{{PreviewImage}}" ng-show="PreviewImage != null" alt="" height="440" width="750" ;>
+
+            <br><br>
+            <div ng-show="httpRequestFailed" class="alert alert-danger"> A problem occured on server! Plate could not read !</div>
+            <img src="/static/waiting.gif" ng-show="httpRequestWaiting==true" alt="" height="90">
+            <div ng-show="httpRequestWaiting == false && httpRequestFailed == false">
+              <h5 style="align-items: center">Location of Plate:</h5>
+              <img src="{{filepath}}plate.jpg" alt="location" height="90">
+
+              <br><br>
+              <h5 style="align-items: center">Characters:</h5>
+              <span ng-repeat="char in charimages">
+                <img src={{filepath}}{{char}}.jpg height="90"/> 
+                &numsp;
+              </span>
+              <br><br>
+              <h5>Plate String:</h5>
+              <h1 style="color:red"> 
+              <span ng-repeat="let in letters">{{let}}</span>
+              </h1>
+
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="closeFile()">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="/static/js/index.js"></script>
+  <script src="/static/js/controllers/main.js"></script>
+  <script src="/static/js/upload.js"></script>
+</body>
+
+</html>
